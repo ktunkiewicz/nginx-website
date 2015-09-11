@@ -79,5 +79,7 @@ Contributing
 
 License and Authors
 -------------------
+
 Author: Kamil Tunkiewicz
+
 Licence: MIT
