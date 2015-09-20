@@ -27,7 +27,7 @@ server {
 
   location ~ \.php$ {
 <% if @php_type == "phpfpm-socket" %>
-    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    fastcgi_pass unix:/var/run/php-fpm-www.sock;
 <% end %>
 <% if @php_type == "tcpip" %>
     fastcgi_keep_conn on;
