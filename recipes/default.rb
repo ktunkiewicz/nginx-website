@@ -10,7 +10,6 @@ sites = data_bag("websites")
 is_default_site = true;
 
 sites.each do |site|
-puts site.inspect;exit;
   website = data_bag_item("websites", site)
   type = website['php_type'] || 'phpfpm-socket'
   ssl_enabled = website['ssl_enabled'] || false
