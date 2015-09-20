@@ -14,6 +14,13 @@ sites.each do |site|
   type = website['php_type'] || 'phpfpm-socket'
   ssl_enabled = website['ssl_enabled'] || false
 
+  directory '/etc/nginx/ssl' do
+    owner 'root'
+    group 'root'
+    mode '0755'
+    action :create
+  end
+
   file "/etc/nginx/ssl/#{website['name']}.crt" do
     content "-----BEGIN CERTIFICATE-----\n#{website['ssl_certificate']}'\n-----END CERTIFICATE-----"
     owner 'root'

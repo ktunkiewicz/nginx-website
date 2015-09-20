@@ -75,9 +75,10 @@ Just include `nginx-website` in your `run_list`:
 }
 ```
 
-And add any number of databags in "websites" databags folder. Example:
+And add any number of databags in "websites" databags folder. Example file `example.json`:
 ```json
 {
+  "id": "example",
   "hostname": "example.com",
   "name": "example",
   "root": "/var/www/html/example/public",
