@@ -1,6 +1,12 @@
 server {
-  listen   80 default_server;
+  listen   80 <% if is_default_site %>default_server<% end %>;
   server_name  <%= @hostname %>;
+
+<% if @ssl_enabled %>
+  listen   443 ssl;
+  ssl_certificate     /etc/nginx/ssl/<%= @name %>.crt;
+  ssl_certificate_key /etc/nginx/ssl/<%= @name %>.key;
+<% end %>
 
   access_log  /var/log/nginx/<%= @name %>.access.log;
   error_log  /var/log/nginx/<%= @name %>.error.log notice;
@@ -20,11 +26,21 @@ server {
   }
 
   location ~ \.php$ {
+<% if @php_type == "phpfpm-tcpip" %>
+    fastcgi_keep_conn off;
+    fastcgi_pass   127.0.0.1:9000;
+<% end %>
+<% if @php_type == "phpfpm-socket" %>
+    fastcgi_pass unix:/var/run/php5-fpm.sock;
+<% end %>
+<% if @php_type == "hhvm-tcpip" %>
     fastcgi_keep_conn on;
     fastcgi_pass   127.0.0.1:9000;
+<% end %>
     fastcgi_index  index.php;
     fastcgi_param  SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
     fastcgi_param  DOCUMENT_ROOT $realpath_root;
     include        fastcgi_params;
   }
+
 }

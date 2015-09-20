@@ -8,37 +8,55 @@ Websites configuration is held in "websites" data bags. Each databag should cont
     <th>Key</th>
     <th>Type</th>
     <th>Description</th>
-    <th>Default</th>
+    <th>Example</th>
   </tr>
   <tr>
     <td><tt>hostname</tt></td>
     <td>String</td>
     <td>Hostname of the server</td>
-    <td>default.dev</td>
+    <td>myproject.dev</td>
   </tr>
   <tr>
     <td><tt>name</tt></td>
     <td>String</td>
     <td>Short name of the website (for naming directories etc.)</td>
-    <td>default</td>
+    <td>myproject</td>
   </tr>
   <tr>
     <td><tt>root</tt></td>
     <td>String</td>
     <td>Root directory of website (where index.php is located)</td>
-    <td>/var/www/html/default</td>
+    <td>/var/www/html/myproject/public</td>
   </tr>
   <tr>
-    <td><tt>type</tt></td>
+    <td><tt>php_type</tt></td>
     <td>String</td>
-    <td>Type of php interpreter (php-fpm or hhvm)</td>
-    <td>php-fpm</td>
+    <td>Type of connection to php engine:
+      <ul>
+        <li>phpfpm-socket - connects to php-fpm socket</li>
+        <li>phpfpm-tcpip - connects to 127.0.0.1:9000 with fastcgi_keep_conn = off</li>
+        <li>hhvm-tcpip - connects to 127.0.0.1:9000</li>
+      </ul>
+    </td>
+    <td></td>
   </tr>
   <tr>
     <td><tt>ssl_enabled</tt></td>
     <td>Boolean</td>
-    <td>Should SSL be enabled on this website. See note below. </td>
-    <td>false</td>
+    <td>Should SSL be enabled on this website.</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><tt>ssl_certificate (required if ssl is enabled)</tt></td>
+    <td>String</td>
+    <td>Certificate string</td>
+    <td>MIIDBjCCAe40CxkI(...)CirgpSN7nNNd2ueCeg==</td>
+  </tr>
+  <tr>
+    <td><tt>ssl_certificate_key (required if ssl is enabled)</tt></td>
+    <td>String</td>
+    <td>Certificate key string</td>
+    <td>MIIEpQIBAAKCAQEA9wa(...)YV9254alIILxlAOjzJPTeb/BT2qI=</td>
   </tr>
 </table>
 
@@ -46,11 +64,11 @@ Usage
 -----
 
 #### nginx-website::default
-Just include `nginx-website` in your node's `run_list`:
+Just include `nginx-website` in your `run_list`:
 
 ```json
 {
-  "name":"my_node",
+  (...)
   "run_list": [
     "recipe[nginx-website]"
   ]
@@ -62,8 +80,8 @@ And add any number of databags in "websites" databags folder. Example:
 {
   "hostname": "example.com",
   "name": "example",
-  "root": "/var/www/html/default/public",
-  "type": "php-fpm",
+  "root": "/var/www/html/example/public",
+  "type": "phpfpm-socket",
   "ssl_enabled": false
 }
 ```

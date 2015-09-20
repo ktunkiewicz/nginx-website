@@ -7,10 +7,27 @@
 
 sites = data_bag("websites")
 
+is_default_site = true;
+
 sites.each do |site|
+puts site.inspect;exit;
   website = data_bag_item("websites", site)
-  type = website['type'] || 'php-fpm'
+  type = website['php_type'] || 'phpfpm-socket'
   ssl_enabled = website['ssl_enabled'] || false
+
+  file '/etc/nginx/ssl/#{website['name']}.crt' do
+    content "-----BEGIN CERTIFICATE-----\n#{website['ssl_certificate']}'\n-----END CERTIFICATE-----"
+    owner 'root'
+    group 'root'
+    mode '0660'
+  end
+
+  file '/etc/nginx/ssl/#{website['name']}.key' do
+    content "-----BEGIN RSA PRIVATE KEY-----\n#{website['ssl_certificate_key']}'\n-----END RSA PRIVATE KEY-----"
+    owner 'root'
+    group 'root'
+    mode '0660'
+  end
 
   template "/etc/nginx/sites-available/#{website['name']}.conf" do
     source 'server.erb'
@@ -21,8 +38,9 @@ sites.each do |site|
       :hostname => website['hostname'],
       :name => website['name'],
       :root => website['root'],
-      :type => website['type'],
+      :php_type => website['php_type'],
       :ssl_enabled => website['ssl_enabled']
+      :is_default_site => is_default_site
     })
     notifies :restart, 'service[nginx]', :delayed
   end
@@ -32,5 +50,5 @@ sites.each do |site|
     action :create
   end
 
-
+  is_default_site = false;
 end
