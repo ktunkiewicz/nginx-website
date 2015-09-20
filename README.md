@@ -34,8 +34,8 @@ Websites configuration is held in "websites" data bags. Each databag should cont
     <td>Type of connection to php engine:
       <ul>
         <li>phpfpm-socket - connects to php-fpm socket</li>
-        <li>phpfpm-tcpip - connects to 127.0.0.1:9000 with fastcgi_keep_conn = off</li>
-        <li>hhvm-tcpip - connects to 127.0.0.1:9000</li>
+        <li>tcpip - connects to 127.0.0.1:9000 (use this for HHVM)</li>
+        <li>tcpip-no-keep-conn - connects to 127.0.0.1:9000 with fastcgi_keep_conn = off</li>
       </ul>
     </td>
     <td></td>
