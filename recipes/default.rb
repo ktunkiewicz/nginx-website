@@ -14,14 +14,14 @@ sites.each do |site|
   type = website['php_type'] || 'phpfpm-socket'
   ssl_enabled = website['ssl_enabled'] || false
 
-  file '/etc/nginx/ssl/#{website['name']}.crt' do
+  file "/etc/nginx/ssl/#{website['name']}.crt" do
     content "-----BEGIN CERTIFICATE-----\n#{website['ssl_certificate']}'\n-----END CERTIFICATE-----"
     owner 'root'
     group 'root'
     mode '0660'
   end
 
-  file '/etc/nginx/ssl/#{website['name']}.key' do
+  file "/etc/nginx/ssl/#{website['name']}.key" do
     content "-----BEGIN RSA PRIVATE KEY-----\n#{website['ssl_certificate_key']}'\n-----END RSA PRIVATE KEY-----"
     owner 'root'
     group 'root'
@@ -38,7 +38,7 @@ sites.each do |site|
       :name => website['name'],
       :root => website['root'],
       :php_type => website['php_type'],
-      :ssl_enabled => website['ssl_enabled']
+      :ssl_enabled => website['ssl_enabled'],
       :is_default_site => is_default_site
     })
     notifies :restart, 'service[nginx]', :delayed
