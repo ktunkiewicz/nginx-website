@@ -1,5 +1,5 @@
 server {
-  listen   80 <% if is_default_site %>default_server<% end %>;
+  listen   80 <% if @is_default_site %>default_server<% end %>;
   server_name  <%= @hostname %>;
 
 <% if @ssl_enabled %>
