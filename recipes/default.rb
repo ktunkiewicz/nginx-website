@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: nginx_website
+# Cookbook Name:: nginx-website
 # Recipe:: default
 #
 # Author: Kamil Tunkiewicz

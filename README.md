@@ -1,4 +1,4 @@
-nginx_website Cookbook
+nginx-website Cookbook
 =================
 This cookbook configures nginx to serve PHP websites.
 Websites configuration is held in "websites" data bags. Each databag should contain the following keys:
@@ -45,14 +45,14 @@ Websites configuration is held in "websites" data bags. Each databag should cont
 Usage
 -----
 
-#### nginx_website::default
-Just include `nginx_website` in your node's `run_list`:
+#### nginx-website::default
+Just include `nginx-website` in your node's `run_list`:
 
 ```json
 {
   "name":"my_node",
   "run_list": [
-    "recipe[nginx_website]"
+    "recipe[nginx-website]"
   ]
 }
 ```

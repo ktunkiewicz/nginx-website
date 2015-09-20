@@ -1,4 +1,4 @@
-name             'nginx_website'
+name             'nginx-website'
 maintainer       'Kamil Tunkiewicz'
 maintainer_email 'kamil.tunkiewicz@gmail.com'
 license          'MIT'
