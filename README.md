@@ -52,14 +52,14 @@ Each data bag should contain the following keys:
   <tr>
     <td><tt>ssl_certificate (required if ssl is enabled)</tt></td>
     <td>String</td>
-    <td>Certificate string</td>
-    <td>MIIDBjCCAe40CxkI(...)CirgpSN7nNNd2ueCeg==</td>
+    <td>Certificate string (look out to properly excape special characters in json)</td>
+    <td></td>
   </tr>
   <tr>
     <td><tt>ssl_certificate_key (required if ssl is enabled)</tt></td>
     <td>String</td>
-    <td>Certificate key string</td>
-    <td>MIIEpQIBAAKCAQEA9wa(...)YV9254alIILxlAOjzJPTeb/BT2qI=</td>
+    <td>Certificate string (look out to properly excape special characters in json)</td>
+    <td></td>
   </tr>
 </table>
 
