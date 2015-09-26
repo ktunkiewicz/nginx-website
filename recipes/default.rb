@@ -22,14 +22,14 @@ sites.each do |site|
   end
 
   file "/etc/nginx/ssl/#{website['name']}.crt" do
-    content "-----BEGIN CERTIFICATE-----\n#{website['ssl_certificate']}'\n-----END CERTIFICATE-----"
+    content "-----BEGIN CERTIFICATE-----\n#{website['ssl_certificate']}\n-----END CERTIFICATE-----"
     owner 'root'
     group 'root'
     mode '0660'
   end
 
   file "/etc/nginx/ssl/#{website['name']}.key" do
-    content "-----BEGIN RSA PRIVATE KEY-----\n#{website['ssl_certificate_key']}'\n-----END RSA PRIVATE KEY-----"
+    content "-----BEGIN RSA PRIVATE KEY-----\n#{website['ssl_certificate_key']}\n-----END RSA PRIVATE KEY-----"
     owner 'root'
     group 'root'
     mode '0660'
