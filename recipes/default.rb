@@ -5,7 +5,7 @@
 # Author: Kamil Tunkiewicz
 #
 
-sites = data_bag("websites")
+sites = data_bag(node['nginx-website']['bag'])
 
 is_default_site = true;
 

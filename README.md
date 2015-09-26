@@ -1,7 +1,9 @@
 nginx-website Cookbook
 =================
 This cookbook configures nginx to serve PHP websites.
-Websites configuration is held in "websites" data bags. Each databag should contain the following keys:
+Websites configuration is held in `node['nginx-website']['bag']` data bag (default databag nam is: "websites").
+
+Each databag should contain the following keys:
 
 <table>
   <tr>
