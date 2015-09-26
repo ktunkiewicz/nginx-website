@@ -1,8 +1,8 @@
 server {
   listen   80 <% if @is_default_site %>default_server<% end %>;
   server_name  <%= @hostname %>;
-
 <% if @ssl_enabled %>
+
   listen   443 ssl;
   ssl_certificate     /etc/nginx/ssl/<%= @name %>.crt;
   ssl_certificate_key /etc/nginx/ssl/<%= @name %>.key;

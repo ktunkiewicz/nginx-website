@@ -10,7 +10,7 @@ sites = data_bag(node['nginx-website']['bag'])
 is_default_site = true;
 
 sites.each do |site|
-  website = data_bag_item("websites", site)
+  website = data_bag_item(node['nginx-website']['bag'], site)
   type = website['php_type'] || 'phpfpm-socket'
   ssl_enabled = website['ssl_enabled'] || false
 
