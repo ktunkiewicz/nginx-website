@@ -28,13 +28,11 @@ server {
   location ~ \.php$ {
 <% if @php_type == "phpfpm-socket" %>
     fastcgi_pass unix:/var/run/php-fpm-www.sock;
-<% end %>
-<% if @php_type == "tcpip" %>
-    fastcgi_keep_conn on;
-    fastcgi_pass   127.0.0.1:9000;
-<% end %>
-<% if @php_type == "tcpip-no-keep-conn" %>
+<% else if @php_type == "tcpip-no-keep-conn" %>
     fastcgi_keep_conn off;
+    fastcgi_pass   127.0.0.1:9000;
+<% else %>
+    fastcgi_keep_conn on;
     fastcgi_pass   127.0.0.1:9000;
 <% end %>
     fastcgi_index  index.php;
