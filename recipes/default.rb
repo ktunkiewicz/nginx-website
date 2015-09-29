@@ -7,11 +7,10 @@
 
 sites = data_bag(node['nginx-website']['bag'])
 
-is_default_site = true;
-
 sites.each do |site|
   website = data_bag_item(node['nginx-website']['bag'], site)
   type = website['php_type'] || 'phpfpm-socket'
+  is_default_site = website['default'] || false
   ssl_enabled = website['ssl_enabled'] || false
 
   directory '/etc/nginx/ssl' do
@@ -55,6 +54,4 @@ sites.each do |site|
     to "/etc/nginx/sites-available/#{website['name']}.conf"
     action :create
   end
-
-  is_default_site = false;
 end
